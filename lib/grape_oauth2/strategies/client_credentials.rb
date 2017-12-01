@@ -7,6 +7,7 @@ module Grape
         class << self
           # Processes Client Credentials request.
           def process(request)
+            request.invalid_client! if request.client_secret.nil?
             client = authenticate_client(request)
             request.invalid_client! if client.nil?
 
